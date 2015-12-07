@@ -25,18 +25,47 @@
 				<h3><span class="fa fa-user"></span>  <%= user.local.email %><br></h3>
 
 					<p>
-						<strong>moday</strong>:			<input type="text" value=<%= user.dayss.mon.start %> name="mon">
-						 --       <input type="text" value=<%= user.dayss.mon.endd %> name="mon"><br>
-						<strong>tues</strong>:			<input type="text" value=<%= user.dayss.mon.start %> name="mon">
-						--       <input type="text" value=<%= user.dayss.mon.endd %> name="mon"><br>
-						<strong>wed</strong>:			<input type="text" value=<%= user.dayss.mon.start %> name="mon">
-						--       <input type="text" value=<%= user.dayss.mon.endd %> name="mon"><br>
-						<strong>thurs</strong>:			<input type="text" value=<%= user.dayss.mon.start %> name="mon">
-						--       <input type="text" value=<%= user.dayss.mon.endd %> name="mon"><br>
-						<strong>friday</strong>:			<input type="text" value=<%= user.dayss.mon.start %> name="mon">
-						--       <input type="text" value=<%= user.dayss.mon.endd %> name="mon">
-					</p>
+				<form action="/profile" method="post">
+						<strong>monday</strong>:
+					<input type="text" value=<%= user.dayss.mon.start %> name="monstart">
+						 --       <input type="text" value=<%= user.dayss.mon.endd %> name="monend"><br>
+						<strong>tues</strong>:
+					<input type="text" value=<%= user.dayss.tue.start %> name="tuestart">
+						--       <input type="text" value=<%= user.dayss.tue.endd %> name="tueend"><br>
+						<strong>wed</strong>:
+					<input type="text" value=<%= user.dayss.wed.start %> name="wedstart">
+						--       <input type="text" value=<%= user.dayss.wed.endd %> name="wedend"><br>
+						<strong>thurs</strong>:
+					<input type="text" value=<%= user.dayss.thurs.start %> name="thursstart">
+						--       <input type="text" value=<%= user.dayss.thurs.endd %> name="thursend"><br>
+						<strong>friday</strong>:
+					<input type="text" value=<%= user.dayss.fri.start %> name="fristart">
+						--       <input type="text" value=<%= user.dayss.fri.endd %> name="friend"><br>
+					<strong>saturday</strong>:
+					<input type="text" value=<%= user.dayss.sat.start %> name="satstart">
+					--       <input type="text" value=<%= user.dayss.sat.endd %> name="friend"><br>
+					<strong>sunday</strong>:
+					<input type="text" value=<%= user.dayss.sun.start %> name="sunstart">
+					--       <input type="text" value=<%= user.dayss.sun.endd %> name="friend">
 
+				<button type="submit" class="btn btn-warning btn-lg">Submit Timings</button>
+</form>
+				</p>
+
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="well">
+				<h3>BTN</h3>
+				<p>
+					<br>
+					<br>
+					<br>
+
+					<br>
+					<br>
+					<br>
+				</p>
 			</div>
 		</div>
 

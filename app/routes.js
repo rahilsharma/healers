@@ -1,4 +1,5 @@
 // app/routes.js
+var User = require('../app/models/user');
 module.exports = function(app, passport) {
 
 	// =====================================
@@ -56,6 +57,46 @@ module.exports = function(app, passport) {
 		res.render('profile.ejs', {
 			user : req.user // get the user out of session and pass to template
 		});
+	});
+	app.post('/profile', isLoggedIn, function(req, res) {
+		console.log('came till here');
+		console.log(req.body);
+		console.log(req.user._id);
+		User.findById(req.user._id, function(err, user) {
+			if (err) throw err;
+
+			// change the users location
+			user.dayss.mon.start = req.body.monstart;
+			user.dayss.mon.endd = req.body.monend;
+
+            user.dayss.tue.start =req.body.tuestart;
+			user.dayss.tue.endd =req.body.tueend;
+
+			user.dayss.wed.start =req.body.wedstart;
+			user.dayss.wed.endd =req.body.wedend;
+
+			user.dayss.thurs.start =req.body.thursstart;
+			user.dayss.thurs.endd =req.body.thursend;
+
+			user.dayss.fri.start =req.body.thursstart;
+			user.dayss.fri.endd =req.body.thursend;
+
+			user.dayss.sat.start =req.body.fristart;
+			user.dayss.sat.endd =req.body.friend;
+
+			user.dayss.sun.start =req.body.satstart;
+			user.dayss.sun.endd =req.body.sunstart;
+
+
+			// save the user
+			user.save(function(err) {
+				if (err) throw err;
+
+				console.log('Doc details successfully updated!');
+			});
+
+		});
+		res.redirect('/profile');
 	});
 
 	// =====================================
