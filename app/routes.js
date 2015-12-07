@@ -1,7 +1,6 @@
 // app/routes.js
 var User = require('../app/models/user');
 module.exports = function(app, passport) {
-
 	// =====================================
 	// HOME PAGE (with login links) ========
 	// =====================================
@@ -11,15 +10,14 @@ module.exports = function(app, passport) {
 	app.get('/indexdoc', function(req, res) {
 		res.render('indexdoc.ejs'); // load the index.ejs file
 	});
-	app.get('/indexpost', function(req, res) {
-		res.render('indexpost.ejs'); // load the index.ejs file
+	app.get('/indexpat', function(req, res) {
+		res.render('indexpat.ejs'); // load the index.ejs file
 	});
 	// =====================================
 	// LOGIN ===============================
 	// =====================================
 	// show the login form
 	app.get('/login', function(req, res) {
-
 		// render the page and pass in any flash data if it exists
 		res.render('login.ejs', { message: req.flash('loginMessage') });
 	});
@@ -36,9 +34,13 @@ module.exports = function(app, passport) {
 	// =====================================
 	// show the signup form
 	app.get('/signup', function(req, res) {
-
 		// render the page and pass in any flash data if it exists
+
 		res.render('signup.ejs', { message: req.flash('signupMessage') });
+	});
+	app.get('/signuppat', function(req, res) {
+		// render the page and pass in any flash data if it exists
+		res.render('signuppat.ejs', { message: req.flash('signupMessage') });
 	});
 
 	// process the signup form
@@ -47,24 +49,28 @@ module.exports = function(app, passport) {
 		failureRedirect : '/signup', // redirect back to the signup page if there is an error
 		failureFlash : true // allow flash messages
 	}));
+	app.post('/signuppat', passport.authenticate('local-signup', {
+		successRedirect : '/profile', // redirect to the secure profile section
+		failureRedirect : '/signuppat', // redirect back to the signup page if there is an error
+		failureFlash : true // allow flash messages
+	}
 
+	));
 	// =====================================
 	// PROFILE SECTION =========================
 	// =====================================
 	// we will want this protected so you have to be logged in to visit
 	// we will use route middleware to verify this (the isLoggedIn function)
 	app.get('/profile', isLoggedIn, function(req, res) {
+		console.log(req.body);
 		res.render('profile.ejs', {
 			user : req.user // get the user out of session and pass to template
 		});
 	});
 	app.post('/profile', isLoggedIn, function(req, res) {
 		console.log('came till here');
-		console.log(req.body);
-		console.log(req.user._id);
 		User.findById(req.user._id, function(err, user) {
 			if (err) throw err;
-
 			// change the users location
 			user.dayss.mon.start = req.body.monstart;
 			user.dayss.mon.endd = req.body.monend;
@@ -91,14 +97,11 @@ module.exports = function(app, passport) {
 			// save the user
 			user.save(function(err) {
 				if (err) throw err;
-
 				console.log('Doc details successfully updated!');
 			});
-
 		});
 		res.redirect('/profile');
 	});
-
 	// =====================================
 	// LOGOUT ==============================
 	// =====================================

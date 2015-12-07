@@ -86,7 +86,7 @@ module.exports = function(passport) {
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
     function(req, email, password, done) { // callback with email and password from our form
-
+ var usr={};
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
         User.findOne({ 'local.email' :  email }, function(err, user) {
@@ -99,12 +99,30 @@ module.exports = function(passport) {
                 return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
 
             // if the user is found but the password is wrong
-            if (!user.validPassword(password))
+            if (!user.validPassword(password)) {
                 return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+
+
+            }else{
+                console.log(user);
+                User.findById(usr._id, function(err, user) {
+                    if (err) throw err;
+                    // change the users location
+                    console.log('came till here');
+                    console.log(req.body.docorpat);
+                    user.docorpat=req.body.docorpat;
+                    // save the user
+                    user.save(function(err) {
+                        if (err) throw err;
+                        console.log('Doc details successfully updated!');
+                    });
+                });
+            }
 
             // all is well, return successful user
             return done(null, user);
         });
+
     }));
 
 };

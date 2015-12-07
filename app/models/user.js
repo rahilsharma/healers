@@ -9,7 +9,9 @@ var userSchema = mongoose.Schema({
     local            : {
         email        : String,
         password     : String,
+
     },
+    docorpat :String,
     dayss:{
         mon:{
             start:{ type: String, default: '10' } ,
